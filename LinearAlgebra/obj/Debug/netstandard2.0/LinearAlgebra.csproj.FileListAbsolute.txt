@@ -1,9 +1,0 @@
-C:\Sandbox\LinearAlgebra\bin\Debug\netstandard2.0\System.Math.LinearAlgebra.deps.json
-C:\Sandbox\LinearAlgebra\bin\Debug\netstandard2.0\System.Math.LinearAlgebra.dll
-C:\Sandbox\LinearAlgebra\bin\Debug\netstandard2.0\System.Math.LinearAlgebra.pdb
-C:\Sandbox\LinearAlgebra\obj\Debug\netstandard2.0\LinearAlgebra.csprojAssemblyReference.cache
-C:\Sandbox\LinearAlgebra\obj\Debug\netstandard2.0\LinearAlgebra.csproj.CoreCompileInputs.cache
-C:\Sandbox\LinearAlgebra\obj\Debug\netstandard2.0\LinearAlgebra.AssemblyInfoInputs.cache
-C:\Sandbox\LinearAlgebra\obj\Debug\netstandard2.0\LinearAlgebra.AssemblyInfo.cs
-C:\Sandbox\LinearAlgebra\obj\Debug\netstandard2.0\System.Math.LinearAlgebra.dll
-C:\Sandbox\LinearAlgebra\obj\Debug\netstandard2.0\System.Math.LinearAlgebra.pdb
