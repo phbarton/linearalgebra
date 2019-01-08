@@ -30,16 +30,16 @@ namespace System.Math.LinearAlgebra
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="System.Decimal"/> with the specified row.
+        /// Gets or sets the <see cref="System.Decimal"/> at the specified index.
         /// </summary>
         /// <value>
-        /// The <see cref="System.Decimal"/>.
+        /// The <see cref="System.Decimal"/> value at <paramref name="index"/>.
         /// </value>
-        /// <param name="row">The row.</param>
-        /// <returns></returns>
-        public decimal this[int row] {
-            get => this.Storage[row];
-            set => this.Storage[row] = value;
+        /// <param name="index">The index into the vector.</param>
+        /// <returns>The <see cref="System.Decimal"/> value at <paramref name="index"/></returns>
+        public decimal this[int index] {
+            get => this.Storage[index];
+            set => this.Storage[index] = value;
         }
 
         /// <summary>
