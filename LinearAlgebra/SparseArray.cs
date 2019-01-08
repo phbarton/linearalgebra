@@ -15,7 +15,7 @@ namespace System.Math.LinearAlgebra
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(SparseArrayDebugView))]
     [Serializable]
-    internal class SparseArray<T> : ICloneable, IEnumerable<T>, IList<T> where T : IComparable<T>
+    public class SparseArray<T> : ICloneable, IEnumerable<T>, IList<T> where T : IComparable<T>
     {
         /// <summary>
         /// Enumerator for the <seealso cref="SparseArray{T}"/> class.

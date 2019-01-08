@@ -4,10 +4,8 @@ using System.Text;
 
 namespace System.Math.LinearAlgebra
 {
-    public class Matrix
+    public class Matrix : MatrixBase<Vector[]>
     {
-        private Dimension _dimension;
-        private SparseArray<decimal>[] _rows;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Matrix"/> class.
@@ -30,14 +28,13 @@ namespace System.Math.LinearAlgebra
         /// Initializes a new instance of the <see cref="Matrix"/> class.
         /// </summary>
         /// <param name="dimension">The dimension.</param>
-        public Matrix(Dimension dimension)
+        public Matrix(Dimension dimension) : base(dimension)
         {
-            this._dimension = (Dimension)dimension.Clone();
-            this._rows = new SparseArray<decimal>[this._dimension.Columns];
+            this.Storage = new Vector[dimension.Rows];
 
-            for (var i = 0; i < this._dimension.Rows; i++)
+            for (var i = 0; i < dimension.Rows; i++)
             {
-                this._rows[i] = new SparseArray<decimal>(this._dimension.Columns);
+                this.Storage[i] = new Vector(dimension.Columns);
             }
         }
 
@@ -45,23 +42,24 @@ namespace System.Math.LinearAlgebra
         /// Initializes a new instance of the <see cref="Matrix"/> class.
         /// </summary>
         /// <param name="copy">The copy.</param>
-        public Matrix(Matrix copy)
+        public Matrix(Matrix copy):base(copy.Dimensions)
         {
-            this._dimension = (Dimension)copy._dimension.Clone();
-            this._rows = new SparseArray<decimal>[this._dimension.Columns];
+            this.Storage = new Vector[this.Dimensions.Rows];
 
             for (var i = 0; i < this.Dimensions.Rows; i++)
             {
-                this._rows[i] = new SparseArray<decimal>(copy._rows[i].ToArray());
+                this.Storage[i] = new Vector(copy[i].ToArray());
             }
         }
 
         /// <summary>
-        /// Gets the dimensions.
+        /// Gets the <see cref="Vector"/> with the specified row.
         /// </summary>
         /// <value>
-        /// The dimensions.
+        /// The <see cref="Vector"/>.
         /// </value>
-        public Dimension Dimensions => this._dimension;
+        /// <param name="row">The row.</param>
+        /// <returns></returns>
+        public Vector this[int row] => this.Storage[row];
     }
 }
