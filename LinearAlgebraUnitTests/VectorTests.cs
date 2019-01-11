@@ -9,6 +9,20 @@ namespace System.Math.LinearAlgebra.UnitTests
     public class VectorTests
     {
         [TestMethod]
+        public void Constructor_Copy_NonNull_Value()
+        {
+            var copy = new Vector(new[] { 1M, 2M, 3M });
+            var v = new Vector(copy);
+
+            Assert.IsNotNull(v, "The vector is null after construction.");
+            Assert.AreEqual(copy.Dimensions, v.Dimensions, "Incorrect vector dimensions");
+            Assert.IsTrue(copy.ToArray().SequenceEqual(v.ToArray()), "Incorrect values and/or order for vector.");
+        }
+
+        [TestMethod]
+        public void Constructor_Copy_Null_Value() => Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Vector((Vector)null));
+
+        [TestMethod]
         public void Constructor_Enumerable_Empty_Value() => Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Vector(new List<decimal>()));
 
         [TestMethod]
@@ -40,7 +54,7 @@ namespace System.Math.LinearAlgebra.UnitTests
         }
 
         [TestMethod]
-        public void Constructor_Params_Null_Value() => Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Vector(null));
+        public void Constructor_Params_Null_Value() => Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Vector((decimal[])null));
 
         [TestMethod]
         public void Constructor_ZeroVector_NonZero_Length()
