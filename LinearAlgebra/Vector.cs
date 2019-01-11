@@ -24,7 +24,17 @@ namespace System.Math.LinearAlgebra
         /// Initializes a new instance of the <see cref="Vector"/> class.
         /// </summary>
         /// <param name="values">The values.</param>
-        public Vector(IEnumerable<decimal> values) : base(1, values.Count())
+        public Vector(IEnumerable<decimal> values) : 
+            base(1, values?.Count() ?? 0)
+        {
+            this.Storage = new SparseArray<decimal>(values);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Vector"/> class.
+        /// </summary>
+        /// <param name="values">The values.</param>
+        public Vector(params decimal[] values) : base(1, values?.Length ?? 0)
         {
             this.Storage = new SparseArray<decimal>(values);
         }

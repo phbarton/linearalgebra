@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace System.Math.LinearAlgebra
@@ -41,8 +42,24 @@ namespace System.Math.LinearAlgebra
         /// <summary>
         /// Initializes a new instance of the <see cref="Matrix"/> class.
         /// </summary>
+        /// <param name="vectors">The vectors.</param>
+        public Matrix(params Vector[] vectors) : 
+            base(vectors?.Length ?? 0, vectors?.First().Dimensions.Columns ?? 0)
+        {
+            this.Storage = new Vector[vectors.Length];
+
+            for (var i = 0; i < this.Dimensions.Rows; i++)
+            {
+                this.Storage[i] = new Vector(vectors[i].ToArray());
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Matrix"/> class.
+        /// </summary>
         /// <param name="copy">The copy.</param>
-        public Matrix(Matrix copy):base(copy.Dimensions)
+        public Matrix(Matrix copy) : 
+            base(copy?.Dimensions ?? new Dimension(0, 0))
         {
             this.Storage = new Vector[this.Dimensions.Rows];
 
