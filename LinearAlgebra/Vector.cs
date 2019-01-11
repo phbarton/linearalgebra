@@ -40,6 +40,15 @@ namespace System.Math.LinearAlgebra
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Vector"/> class.
+        /// </summary>
+        /// <param name="copy">The copy.</param>
+        public Vector(Vector copy) : base(copy?.Dimensions ?? new Dimension(0, 0))
+        {
+            this.Storage = new SparseArray<decimal>(copy.ToArray());
+        }
+
+        /// <summary>
         /// Gets or sets the <see cref="System.Decimal"/> at the specified index.
         /// </summary>
         /// <value>
