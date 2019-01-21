@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace System.Math.LinearAlgebra.UnitTests
 {
+    [ExcludeFromCodeCoverage]
     [TestClass]
     public class VectorTests
     {
@@ -70,7 +72,7 @@ namespace System.Math.LinearAlgebra.UnitTests
         public void Constructor_ZeroVector_Zero_Length() => Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Vector(0));
 
         [TestMethod]
-        public void Indexer_OK()
+        public void Indexer_Getter_OK()
         {
             var values = new[] { 1M, 2M, 3M };
             var v = new Vector(values);
@@ -81,6 +83,25 @@ namespace System.Math.LinearAlgebra.UnitTests
             for (var i = 0; i < values.Length; i++)
             {
                 Assert.AreEqual(values[i], v[i], $"Incorrect value for vector at position {i}.");
+            }
+        }
+
+        [TestMethod]
+        public void Indexer_Setter_OK()
+        {
+            var values = new[] { 1M, 2M, 3M };
+            var v = new Vector(values);
+
+            v[0] = 2M;
+            v[1] = 4M;
+            v[2] = 6M;
+
+            Assert.IsNotNull(v, "The vector is null after construction.");
+            Assert.AreEqual(new Dimension(1, 3), v.Dimensions, "Incorrect vector dimensions");
+
+            for (var i = 0; i < values.Length; i++)
+            {
+                Assert.AreEqual(2M * values[i], v[i], $"Incorrect value for vector at position {i}.");
             }
         }
 

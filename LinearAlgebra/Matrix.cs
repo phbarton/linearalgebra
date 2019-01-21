@@ -46,6 +46,13 @@ namespace System.Math.LinearAlgebra
         public Matrix(params Vector[] vectors) : 
             base(vectors?.Length ?? 0, vectors?.First().Dimensions.Columns ?? 0)
         {
+            var dim = vectors.First().Dimensions.Columns;
+
+            if (vectors.Any(v => v.Dimensions.Columns != dim))
+            {
+                throw new InvalidOperationException("All vectors must have the same dimension.");
+            }
+
             this.Storage = new Vector[vectors.Length];
 
             for (var i = 0; i < this.Dimensions.Rows; i++)
