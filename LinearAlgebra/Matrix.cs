@@ -2,7 +2,7 @@
 
 namespace System.Math.LinearAlgebra
 {
-    public class Matrix : MatrixBase<Vector[]>
+    public class Matrix : MatrixBase<Matrix, Vector[]>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Matrix"/> class.
@@ -89,5 +89,25 @@ namespace System.Math.LinearAlgebra
         /// <param name="row">The row.</param>
         /// <returns></returns>
         public Vector this[int row] => this.Storage[row];
+
+        /// <summary>
+        /// Transposes this instance.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public override Matrix Transpose()
+        {
+            var m = new Matrix(this.Dimensions.Columns, this.Dimensions.Rows);
+
+            for (var i = 0; i < this.Dimensions.Rows; i++)
+            {
+                for (var j = 0; j < this.Dimensions.Columns; j++)
+                {
+                    m[j][i] = this[i][j];
+                }
+            }
+
+            return m;
+        }
     }
 }

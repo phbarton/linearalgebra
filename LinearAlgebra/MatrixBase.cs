@@ -4,10 +4,10 @@ using System.Text;
 
 namespace System.Math.LinearAlgebra
 {
-    public abstract class MatrixBase<T>
+    public abstract class MatrixBase<TKind, TStorage> where TKind : MatrixBase<TKind, TStorage>
     {
         private Dimension _dimension;
-        private T _storage;
+        private TStorage _storage;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MatrixBase{T}"/> class.
@@ -42,10 +42,16 @@ namespace System.Math.LinearAlgebra
         /// <value>
         /// The storage.
         /// </value>
-        protected internal T Storage
+        protected internal TStorage Storage
         {
             get => this._storage;
             set => this._storage = value;
         }
+
+        /// <summary>
+        /// Transposes this instance.
+        /// </summary>
+        /// <returns></returns>
+        public abstract TKind Transpose();
     }
 }

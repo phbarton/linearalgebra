@@ -114,5 +114,17 @@ namespace System.Math.LinearAlgebra.UnitTests
 
             Assert.IsTrue(values.SequenceEqual(a), "Incorrect values and/or order for vector.");
         }
+
+        [TestMethod]
+        public void Transpose_OK()
+        {
+            var values = new[] { 1M, 2M, 3M };
+            var v = new Vector(values);
+            var vT = v.Transpose();
+
+            Assert.AreEqual(v.Dimensions.Rows, vT.Dimensions.Columns, "Failed to transpose column dimension");
+            Assert.AreEqual(v.Dimensions.Columns, vT.Dimensions.Rows, "Failed to transpose row dimension");
+            Assert.IsTrue(vT.ToArray().SequenceEqual(values), "Transposed values are not correct.");
+        }
     }
 }

@@ -138,5 +138,18 @@ namespace System.Math.LinearAlgebra.UnitTests
                 }
             }
         }
+
+        [TestMethod]
+        public void Transpose_OK()
+        {
+            var m = new Matrix(new Vector(new[] { 1M, 2M, 2M }), new Vector(new[] { 3M, 4M, 4M }));
+            var mT = m.Transpose();
+
+            Assert.AreEqual(m.Dimensions.Rows, mT.Dimensions.Columns, "Failed to transpose column dimension");
+            Assert.AreEqual(m.Dimensions.Columns, mT.Dimensions.Rows, "Failed to transpose row dimension");
+            Assert.IsTrue(mT[0].ToArray().SequenceEqual(new[] { 1M, 3M }), "Failed to transpose row 0 correctly");
+            Assert.IsTrue(mT[1].ToArray().SequenceEqual(new[] { 2M, 4M }), "Failed to transpose row 1 correctly");
+            Assert.IsTrue(mT[2].ToArray().SequenceEqual(new[] { 2M, 4M }), "Failed to transpose row 2 correctly");
+        }
     }
 }
