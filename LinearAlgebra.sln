@@ -5,7 +5,12 @@ VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinearAlgebra", "LinearAlgebra\LinearAlgebra.csproj", "{82C5F076-D738-484F-AA94-3422D2F49680}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinearAlgebraUnitTests", "LinearAlgebraUnitTests\LinearAlgebraUnitTests.csproj", "{A2979ED4-13F2-462E-A98A-0FD9248F77DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinearAlgebraUnitTests", "LinearAlgebraUnitTests\LinearAlgebraUnitTests.csproj", "{A2979ED4-13F2-462E-A98A-0FD9248F77DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5ED2CF7B-664A-470F-BC53-0E83692CBC3E}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
