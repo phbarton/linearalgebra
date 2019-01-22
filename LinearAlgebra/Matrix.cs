@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 
 namespace System.Math.LinearAlgebra
 {
     public class Matrix : MatrixBase<Vector[]>
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Matrix"/> class.
         /// </summary>
@@ -43,7 +39,7 @@ namespace System.Math.LinearAlgebra
         /// Initializes a new instance of the <see cref="Matrix"/> class.
         /// </summary>
         /// <param name="vectors">The vectors.</param>
-        public Matrix(params Vector[] vectors) : 
+        public Matrix(params Vector[] vectors) :
             base(vectors?.Length ?? 0, vectors?.First().Dimensions.Columns ?? 0)
         {
             var dim = vectors.First().Dimensions.Columns;
@@ -65,7 +61,7 @@ namespace System.Math.LinearAlgebra
         /// Initializes a new instance of the <see cref="Matrix"/> class.
         /// </summary>
         /// <param name="copy">The copy.</param>
-        public Matrix(Matrix copy) : 
+        public Matrix(Matrix copy) :
             base(copy?.Dimensions ?? new Dimension(0, 0))
         {
             this.Storage = new Vector[this.Dimensions.Rows];
@@ -75,6 +71,14 @@ namespace System.Math.LinearAlgebra
                 this.Storage[i] = new Vector(copy[i].ToArray());
             }
         }
+
+        /// <summary>
+        /// Gets a value indicating whether this matrix is square (i.e. the number of rows matches the number of columns).
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this matrix is square; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsSquare => this.Dimensions.Rows == this.Dimensions.Columns;
 
         /// <summary>
         /// Gets the <see cref="Vector"/> with the specified row.

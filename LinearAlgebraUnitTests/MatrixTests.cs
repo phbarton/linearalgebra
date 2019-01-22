@@ -108,6 +108,22 @@ namespace System.Math.LinearAlgebra.UnitTests
         }
 
         [TestMethod]
+        public void IsSquare_False()
+        {
+            var m = new Matrix(new Vector(new[] { 1M, 2M, 2M }), new Vector(new[] { 3M, 4M, 4M }));
+
+            Assert.IsFalse(m.IsSquare, "Incorrect value for non-square matrix.");
+        }
+
+        [TestMethod]
+        public void IsSquare_True()
+        {
+            var m = new Matrix(new Vector(new[] { 1M, 2M }), new Vector(new[] { 3M, 4M }));
+
+            Assert.IsTrue(m.IsSquare, "Incorrect value for square matrix.");
+        }
+
+        [TestMethod]
         public void Iterator_OK()
         {
             var m = new Matrix(new Vector(new[] { 1M, 2M }), new Vector(new[] { 3M, 4M }));
