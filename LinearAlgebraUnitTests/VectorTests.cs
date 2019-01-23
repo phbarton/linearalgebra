@@ -72,6 +72,34 @@ namespace System.Math.LinearAlgebra.UnitTests
         public void Constructor_ZeroVector_Zero_Length() => Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Vector(0));
 
         [TestMethod]
+        public void Identity_OK()
+        {
+            var values = new[] { 1M, 2M, 3M };
+            var v = new Vector(values);
+            var id = v.Identity;
+
+            Assert.IsNotNull(id, "Null matrix returned for vector identity.");
+            Assert.AreEqual(new Dimension(v.Dimensions.Columns, v.Dimensions.Columns), id.Dimensions, "Incorrect dimensions of vector identity");
+
+            for (var i = 0; i < id.Dimensions.Rows; i++)
+            {
+                for (var j = 0; j < id.Dimensions.Columns; j++)
+                {
+                    var value = id[i][j];
+
+                    if (i == j)
+                    {
+                        Assert.AreEqual(decimal.One, value, $"Incorrect value of {value} at ({i},{j}) in vector identiity - expected 1");
+                    }
+                    else
+                    {
+                        Assert.AreEqual(decimal.Zero, value, $"Incorrect value of {value} at ({i},{j}) in vector identiity - expected 0");
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
         public void Indexer_Getter_OK()
         {
             var values = new[] { 1M, 2M, 3M };

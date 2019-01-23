@@ -108,6 +108,33 @@ namespace System.Math.LinearAlgebra.UnitTests
         }
 
         [TestMethod]
+        public void Identity_OK()
+        {
+            var m = new Matrix(new Vector(new[] { 1M, 2M, 2M }), new Vector(new[] { 3M, 4M, 4M }));
+            var id = m.Identity;
+
+            Assert.IsNotNull(id, "Null matrix returned for matrix identity.");
+            Assert.AreEqual(new Dimension(m.Dimensions.Columns, m.Dimensions.Columns), id.Dimensions, "Incorrect dimensions of matrix identity");
+
+            for (var i = 0; i < id.Dimensions.Rows; i++)
+            {
+                for (var j = 0; j < id.Dimensions.Columns; j++)
+                {
+                    var value = id[i][j];
+
+                    if (i == j)
+                    {
+                        Assert.AreEqual(decimal.One, value, $"Incorrect value of {value} at ({i},{j}) in matrix identiity - expected 1");
+                    }
+                    else
+                    {
+                        Assert.AreEqual(decimal.Zero, value, $"Incorrect value of {value} at ({i},{j}) in matrix identiity - expected 0");
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
         public void IsSquare_False()
         {
             var m = new Matrix(new Vector(new[] { 1M, 2M, 2M }), new Vector(new[] { 3M, 4M, 4M }));

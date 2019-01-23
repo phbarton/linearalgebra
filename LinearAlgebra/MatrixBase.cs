@@ -37,6 +37,27 @@ namespace System.Math.LinearAlgebra
         public Dimension Dimensions => this._dimension;
 
         /// <summary>
+        /// Gets the identity matrix.
+        /// </summary>
+        /// <value>
+        /// The identity.
+        /// </value>
+        public virtual Matrix Identity
+        {
+            get
+            {
+                var m = new Matrix(this.Dimensions.Columns, this.Dimensions.Columns);
+
+                for (var i = 0; i < m.Dimensions.Columns; i++)
+                {
+                    m[i][i] = decimal.One;
+                }
+
+                return m;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the storage.
         /// </summary>
         /// <value>
