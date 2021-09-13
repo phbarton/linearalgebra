@@ -85,7 +85,7 @@ namespace System.Math.LinearAlgebra.UnitTests
             {
                 for (var j = 0; j < id.Dimensions.Columns; j++)
                 {
-                    var value = id[i][j];
+                    var value = id[i, j];
 
                     if (i == j)
                     {

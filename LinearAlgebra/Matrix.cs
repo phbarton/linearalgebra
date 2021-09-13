@@ -2,7 +2,7 @@
 
 namespace System.Math.LinearAlgebra
 {
-    public class Matrix : MatrixBase<Matrix, Vector[]>
+    public class Matrix : MatrixBase<Matrix>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Matrix"/> class.
@@ -27,12 +27,6 @@ namespace System.Math.LinearAlgebra
         /// <param name="dimension">The dimension.</param>
         public Matrix(Dimension dimension) : base(dimension)
         {
-            this.Storage = new Vector[dimension.Rows];
-
-            for (var i = 0; i < dimension.Rows; i++)
-            {
-                this.Storage[i] = new Vector(dimension.Columns);
-            }
         }
 
         /// <summary>
@@ -49,11 +43,12 @@ namespace System.Math.LinearAlgebra
                 throw new InvalidOperationException("All vectors must have the same dimension.");
             }
 
-            this.Storage = new Vector[vectors.Length];
-
-            for (var i = 0; i < this.Dimensions.Rows; i++)
+            for (var i = 0; i < vectors.Length; i++)
             {
-                this.Storage[i] = new Vector(vectors[i].ToArray());
+                for (var j = 0; j < dim; j++)
+                {
+                    this._storage[i * dim + j] = vectors[i][j];
+                }
             }
         }
 
@@ -64,11 +59,9 @@ namespace System.Math.LinearAlgebra
         public Matrix(Matrix copy) :
             base(copy?.Dimensions ?? new Dimension(0, 0))
         {
-            this.Storage = new Vector[this.Dimensions.Rows];
-
-            for (var i = 0; i < this.Dimensions.Rows; i++)
+            foreach(var k in copy._storage.Keys)
             {
-                this.Storage[i] = new Vector(copy[i].ToArray());
+                this._storage[k] = copy._storage[k];
             }
         }
 
@@ -88,13 +81,40 @@ namespace System.Math.LinearAlgebra
         /// </value>
         /// <param name="row">The row.</param>
         /// <returns></returns>
-        public Vector this[int row] => this.Storage[row];
+        public Vector this[int row]
+        {
+            get
+            {
+                var values = new decimal[this.Dimensions.Columns];
+
+                for (var j = 0; j < values.Length; j++)
+                {
+                    values[j] = this._storage[row * this.Dimensions.Columns + j];
+                }
+
+                return new Vector(values);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the <see cref="System.Decimal"/> with the specified row.
+        /// </summary>
+        /// <value>
+        /// The <see cref="System.Decimal"/>.
+        /// </value>
+        /// <param name="row">The row.</param>
+        /// <param name="column">The column.</param>
+        /// <returns></returns>
+        public decimal this[int row, int column]
+        {
+            get => this._storage[row * this.Dimensions.Columns + column];
+            set => this._storage[row * this.Dimensions.Columns + column] = value;
+        }
 
         /// <summary>
         /// Transposes this instance.
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
         public override Matrix Transpose()
         {
             var m = new Matrix(this.Dimensions.Columns, this.Dimensions.Rows);
@@ -103,7 +123,7 @@ namespace System.Math.LinearAlgebra
             {
                 for (var j = 0; j < this.Dimensions.Columns; j++)
                 {
-                    m[j][i] = this[i][j];
+                    m[j, i] = this[i, j];
                 }
             }
 

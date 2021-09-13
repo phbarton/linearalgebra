@@ -23,7 +23,7 @@ namespace System.Math.LinearAlgebra.UnitTests
             {
                 for (var j = 0; j < 2; j++)
                 {
-                    Assert.AreEqual(m[i][j], m2[i][j], $"Invalid value in matrix at ({i},{j}).");
+                    Assert.AreEqual(m[i, j], m2[i, j], $"Invalid value in matrix at ({i},{j}).");
                 }
             }
         }
@@ -48,7 +48,7 @@ namespace System.Math.LinearAlgebra.UnitTests
             {
                 for (var j = 0; j < 2; j++)
                 {
-                    Assert.AreEqual(2 * i + j + 1, m[i][j], $"Invalid value in matrix at ({i},{j}).");
+                    Assert.AreEqual(2 * i + j + 1, m[i, j], $"Invalid value in matrix at ({i},{j}).");
                 }
             }
         }
@@ -66,9 +66,8 @@ namespace System.Math.LinearAlgebra.UnitTests
 
             Assert.AreEqual(new Dimension(2, 2), m.Dimensions, "Incorrect dimensions of new matrix");
 
-            var values = m.Storage.SelectMany(v => v.ToArray());
-            Assert.AreEqual(4, values.Count(), "Incorrect number of values in matrix");
-            Assert.IsTrue(values.All(i => i == 0), "Incorrect value in matrix");
+            Assert.AreEqual(4, m.Count(), "Incorrect number of values in matrix");
+            Assert.IsTrue(m.All(i => i == 0), "Incorrect value in matrix");
         }
 
         [TestMethod]
@@ -84,9 +83,8 @@ namespace System.Math.LinearAlgebra.UnitTests
 
             Assert.AreEqual(new Dimension(2, 2), m.Dimensions, "Incorrect dimensions of new matrix");
 
-            var values = m.Storage.SelectMany(v => v.ToArray());
-            Assert.AreEqual(4, values.Count(), "Incorrect number of values in matrix");
-            Assert.IsTrue(values.All(i => i == 0), "Incorrect value in matrix");
+            Assert.AreEqual(4, m.Count(), "Incorrect number of values in matrix");
+            Assert.IsTrue(m.All(i => i == 0), "Incorrect value in matrix");
         }
 
         [TestMethod]
@@ -102,9 +100,8 @@ namespace System.Math.LinearAlgebra.UnitTests
 
             Assert.AreEqual(new Dimension(2, 2), m.Dimensions, "Incorrect dimensions of new matrix");
 
-            var values = m.Storage.SelectMany(v => v.ToArray());
-            Assert.AreEqual(4, values.Count(), "Incorrect number of values in matrix");
-            Assert.IsTrue(values.All(i => i == 0), "Incorrect value in matrix");
+            Assert.AreEqual(4, m.Count(), "Incorrect number of values in matrix");
+            Assert.IsTrue(m.All(i => i == 0), "Incorrect value in matrix");
         }
 
         [TestMethod]
@@ -120,7 +117,7 @@ namespace System.Math.LinearAlgebra.UnitTests
             {
                 for (var j = 0; j < id.Dimensions.Columns; j++)
                 {
-                    var value = id[i][j];
+                    var value = id[i, j];
 
                     if (i == j)
                     {
